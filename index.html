@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victoria - Tarot Evolutivo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -21,10 +21,7 @@
             background-color: var(--bg-dark);
             color: var(--white);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* IMAGEN DE FONDO */
+            /* FONDO DE ESTRELLAS FIJO PARA TODOS */
             background-image: url('fondo.png'); 
             background-size: cover;
             background-attachment: fixed;
@@ -32,205 +29,356 @@
         }
 
         h1, h2, h3 { font-family: 'Cinzel', serif; }
-
-        .container { max-width: 1000px; width: 100%; padding: 20px; text-align: center; }
-
-        .section { display: none; animation: fadeIn 0.5s ease; }
-        .section.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .content-img {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .btn-back {
-            display: inline-block;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--text-gold); color: var(--text-gold);
-            padding: 10px 25px; cursor: pointer; margin-bottom: 25px;
-            border-radius: 50px; font-family: 'Cinzel', serif; font-size: 1rem;
-            text-decoration: none; transition: all 0.3s;
-            margin-top: 20px;
-        }
-        .btn-back:hover { background: var(--text-gold); color: var(--bg-dark); }
-
-        /* --- MENÚ ESCRITORIO --- */
-        .menu-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            box-shadow: 0 0 50px rgba(112, 56, 130, 0.3);
-            border-radius: 20px;
-        }
         
-        .menu-img {
-            width: 100%;
-            display: block;
-            border-radius: 20px;
-        }
+        /* --- ESTILOS COMUNES --- */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; text-align: center; }
+        .hidden { display: none !important; }
 
-        .click-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-        .click-area {
-            position: absolute;
-            cursor: pointer;
-            border-radius: 12px;
-            z-index: 10;
-        }
-
-        /* Posiciones Escritorio */
-        .area-sobremi { top: 18%; left: 7%; width: 21%; height: 54%; }
-        .area-agenda { top: 8%; left: 30%; width: 20%; height: 38%; } 
-        .area-mensaje { top: 8%; left: 52%; width: 20%; height: 38%; } 
-        .area-amuletos { top: 8%; left: 74%; width: 20%; height: 38%; } 
-        .area-tarifas { top: 49%; left: 30%; width: 20%; height: 38%; } 
-        .area-testimonios { top: 49%; left: 52%; width: 20%; height: 38%; } 
-        .area-faq { top: 49%; left: 74%; width: 20%; height: 38%; } 
-
-        /* --- ESTILO MÓVIL (REDISEÑADO) --- */
-        .mobile-nav { display: none; }
-
-        @media (max-width: 768px) {
-            .menu-container { display: none; } /* Ocultamos el mapa complejo */
-            .mobile-nav { display: block; width: 100%; }
+        /* =========================================
+           DISEÑO ESCRITORIO (PC) - IDENTICO AL ORIGINAL
+           ========================================= */
+        @media (min-width: 769px) {
+            .mobile-only { display: none; } /* Ocultar todo lo del móvil */
             
-            /* Banner visual en móvil */
-            .mobile-banner {
-                width: 100%;
-                margin-bottom: 20px;
-                border-radius: 15px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-                border: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .mobile-title {
-                font-size: 1.8rem;
-                margin-bottom: 25px;
-                color: var(--text-gold);
-                text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-                letter-spacing: 2px;
-            }
-
-            .mobile-links {
-                display: grid;
-                grid-template-columns: 1fr; /* Una columna para botones grandes */
-                gap: 15px;
-                padding: 0 5px;
-            }
-
-            /* Botones estilo "Carta de Tarot" */
-            .mobile-btn {
+            .desktop-menu-container {
                 position: relative;
-                padding: 20px;
-                background: linear-gradient(135deg, rgba(94, 59, 99, 0.8), rgba(40, 20, 45, 0.9));
-                color: var(--white);
-                text-decoration: none;
-                border-radius: 15px;
-                font-family: 'Cinzel', serif;
-                font-weight: 700;
-                font-size: 1.1rem;
-                border: 1px solid rgba(240, 230, 210, 0.3); /* Borde dorado sutil */
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            .menu-img { width: 100%; display: block; border-radius: 20px; }
+            
+            /* Botones invisibles PC */
+            .click-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+            .click-area { position: absolute; cursor: pointer; border-radius: 12px; z-index: 10; }
+            
+            /* Coordenadas PC */
+            .area-sobremi { top: 18%; left: 7%; width: 21%; height: 54%; }
+            .area-agenda { top: 8%; left: 30%; width: 20%; height: 38%; } 
+            .area-mensaje { top: 8%; left: 52%; width: 20%; height: 38%; } 
+            .area-amuletos { top: 8%; left: 74%; width: 20%; height: 38%; } 
+            .area-tarifas { top: 49%; left: 30%; width: 20%; height: 38%; } 
+            .area-testimonios { top: 49%; left: 52%; width: 20%; height: 38%; } 
+            .area-faq { top: 49%; left: 74%; width: 20%; height: 38%; } 
+
+            /* Imágenes de contenido en PC */
+            .pc-content-img {
+                width: 100%; max-width: 800px; border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-top: 20px;
+            }
+        }
+
+        /* =========================================
+           DISEÑO MÓVIL (NUEVO) - TEXTO + ESTRELLAS
+           ========================================= */
+        @media (max-width: 768px) {
+            .desktop-only { display: none; } /* Ocultar todo lo de PC */
+            
+            .mobile-container {
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Título Principal */
+            .main-title {
+                font-size: 2rem;
+                color: var(--text-gold);
+                margin-bottom: 30px;
+                text-shadow: 0 0 10px rgba(240, 230, 210, 0.5);
+                border-bottom: 1px solid rgba(240, 230, 210, 0.3);
+                padding-bottom: 10px;
+                width: 100%;
+            }
+
+            /* Menú estilo Lista con Cartas */
+            .mobile-menu-list {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+
+            .menu-item {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+                background: rgba(10, 10, 18, 0.6); /* Fondo oscuro semitransparente */
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 15px;
+                padding: 15px;
+                text-decoration: none;
+                color: var(--white);
                 transition: transform 0.2s;
-                overflow: hidden;
             }
 
-            .mobile-btn:active {
-                transform: scale(0.98);
-                background: rgba(94, 59, 99, 1);
+            .menu-item:active { transform: scale(0.98); background: rgba(94, 59, 99, 0.4); }
+
+            .menu-icon {
+                width: 50px;
+                height: auto;
+                margin-right: 20px;
+                filter: sepia(0.2) drop-shadow(0 0 5px rgba(255,255,255,0.2));
             }
 
-            /* Decoración dorada sutil */
-            .mobile-btn::after {
-                content: '✦';
-                position: absolute;
-                right: 15px;
-                color: rgba(240, 230, 210, 0.4);
+            .menu-text h3 {
                 font-size: 1.2rem;
+                color: var(--text-gold);
+                margin-bottom: 5px;
+                text-align: left;
             }
-             .mobile-btn::before {
-                content: '✦';
-                position: absolute;
-                left: 15px;
-                color: rgba(240, 230, 210, 0.4);
-                font-size: 1.2rem;
+            .menu-text p {
+                font-size: 0.9rem;
+                color: #ccc;
+                text-align: left;
+                font-weight: 300;
+            }
+
+            /* --- ESTILOS TEXTO REAL (Para Sobre Mi, Tarifas, etc) --- */
+            .text-content {
+                text-align: left;
+                background: rgba(0, 0, 0, 0.4); /* Leve fondo para leer mejor */
+                padding: 20px;
+                border-radius: 15px;
+                margin-top: 10px;
+            }
+
+            .text-content p {
+                margin-bottom: 15px;
+                line-height: 1.6;
+                font-size: 1rem;
+            }
+
+            .text-content h2 {
+                color: var(--text-gold);
+                margin-bottom: 20px;
+                text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+                padding-bottom: 10px;
+            }
+
+            /* Estilo específico: Sobre Mí con Fotos */
+            .about-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .my-photo {
+                width: 100%;
+                border-radius: 15px;
+                border: 1px solid var(--text-gold);
+                box-shadow: 0 0 15px rgba(240, 230, 210, 0.2);
+            }
+
+            /* Estilo Tarifas/FAQ */
+            .list-item {
+                margin-bottom: 25px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding-bottom: 15px;
+            }
+            .list-title {
+                font-family: 'Cinzel', serif;
+                color: var(--text-gold);
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .btn-back-mobile {
+                background: transparent;
+                border: 1px solid var(--white);
+                color: var(--white);
+                padding: 10px 20px;
+                border-radius: 30px;
+                margin-bottom: 20px;
+                font-family: 'Cinzel', serif;
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="container desktop-only">
         
-        <div id="home" class="section active">
-            
-            <div class="menu-container">
+        <div id="desktop-home" class="desktop-section active">
+            <div class="desktop-menu-container">
                 <img src="menu-principal.png" alt="Menú Tarot" class="menu-img">
                 <div class="click-layer">
-                    <div class="click-area area-sobremi" onclick="showSection('sobre-mi')" title="Sobre Mí"></div>
-                    <a href="https://calendly.com/victoria-tarot/30min" class="click-area area-agenda" target="_blank" title="Agenda tu cita"></a>
-                    <div class="click-area area-mensaje" onclick="showSection('mensaje')" title="Mensaje del día"></div>
-                    <div class="click-area area-amuletos" onclick="alert('Sección Amuletos próximamente')" title="Amuletos"></div>
-                    <div class="click-area area-tarifas" onclick="showSection('tarifas')" title="Tarifas"></div>
-                    <div class="click-area area-testimonios" onclick="alert('Sección Testimonios próximamente')" title="Testimonios"></div>
-                    <div class="click-area area-faq" onclick="showSection('faq')" title="Preguntas Frecuentes"></div>
-                </div>
-            </div>
-
-            <div class="mobile-nav">
-                <img src="menu-principal.png" class="mobile-banner" alt="Victoria Tarot">
-                
-                <h1 class="mobile-title">TAROT EVOLUTIVO</h1>
-                
-                <div class="mobile-links">
-                    <a class="mobile-btn" onclick="showSection('sobre-mi')">Sobre Mí</a>
-                    <a href="https://calendly.com/victoria-tarot/30min" class="mobile-btn" target="_blank" style="border: 1px solid #f0e6d2; box-shadow: 0 0 15px rgba(240, 230, 210, 0.2);">💑 Agenda tu cita</a>
-                    <a class="mobile-btn" onclick="showSection('tarifas')">Tarifas</a>
-                    <a class="mobile-btn" onclick="showSection('mensaje')">Mensaje del día</a>
-                    <a class="mobile-btn" onclick="showSection('faq')">Preguntas Frecuentes</a>
+                    <div class="click-area area-sobremi" onclick="showDesktopSection('desktop-sobre-mi')"></div>
+                    <a href="https://calendly.com/victoria-tarot/30min" class="click-area area-agenda" target="_blank"></a>
+                    <div class="click-area area-mensaje" onclick="showDesktopSection('desktop-mensaje')"></div>
+                    <div class="click-area area-amuletos" onclick="alert('Próximamente')"></div>
+                    <div class="click-area area-tarifas" onclick="showDesktopSection('desktop-tarifas')"></div>
+                    <div class="click-area area-testimonios" onclick="alert('Próximamente')"></div>
+                    <div class="click-area area-faq" onclick="showDesktopSection('desktop-faq')"></div>
                 </div>
             </div>
         </div>
 
-        <div id="sobre-mi" class="section">
-            <button class="btn-back" onclick="showSection('home')">← Volver al menú</button>
-            <img src="sobre-mi.png" alt="Sobre Victoria" class="content-img">
+        <div id="desktop-sobre-mi" class="desktop-section hidden">
+            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button>
+            <br>
+            <img src="sobre-mi.png" class="pc-content-img">
+        </div>
+        <div id="desktop-mensaje" class="desktop-section hidden">
+            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button>
+            <br>
+            <img src="mensaje.png" class="pc-content-img">
+        </div>
+        <div id="desktop-tarifas" class="desktop-section hidden">
+            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button>
+            <br>
+            <img src="tarifas.png" class="pc-content-img">
+        </div>
+        <div id="desktop-faq" class="desktop-section hidden">
+            <button class="btn-back" onclick="showDesktopSection('desktop-home')" style="color:white; background:transparent; border:1px solid white; padding:10px; border-radius:20px; cursor:pointer;">← Volver</button>
+            <br>
+            <img src="faq.png" class="pc-content-img">
         </div>
 
-        <div id="mensaje" class="section">
-            <button class="btn-back" onclick="showSection('home')">← Volver al menú</button>
-            <img src="mensaje.png" alt="Mensaje" class="content-img">
+    </div>
+
+
+    <div class="mobile-container mobile-only">
+
+        <div id="mobile-home" class="mobile-section">
+            <h1 class="main-title">TAROT EVOLUTIVO</h1>
+            
+            <div class="mobile-menu-list">
+                
+                <div class="menu-item" onclick="showMobileSection('mobile-sobre-mi')">
+                    <img src="86008.png" class="menu-icon">
+                    <div class="menu-text">
+                        <h3>Sobre Mí</h3>
+                        <p>Conoce mi historia y mi método.</p>
+                    </div>
+                </div>
+
+                <a href="https://calendly.com/victoria-tarot/30min" target="_blank" class="menu-item" style="border-color: #f0e6d2; background: rgba(94, 59, 99, 0.6);">
+                    <img src="86003.png" class="menu-icon"> <div class="menu-text">
+                        <h3>Agenda tu cita</h3>
+                        <p>Reserva tu lectura aquí.</p>
+                    </div>
+                </a>
+
+                <div class="menu-item" onclick="showMobileSection('mobile-tarifas')">
+                    <img src="86004.png" class="menu-icon"> <div class="menu-text">
+                        <h3>Tarifas</h3>
+                        <p>Opciones de lectura y precios.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" onclick="showMobileSection('mobile-mensaje')">
+                    <img src="86002.png" class="menu-icon"> <div class="menu-text">
+                        <h3>Mensaje del día</h3>
+                        <p>Un consejo del universo para ti.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item" onclick="showMobileSection('mobile-faq')">
+                    <img src="86006.png" class="menu-icon"> <div class="menu-text">
+                        <h3>Preguntas</h3>
+                        <p>Respuestas frecuentes.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <div id="faq" class="section">
-            <button class="btn-back" onclick="showSection('home')">← Volver al menú</button>
-            <img src="faq.png" alt="FAQ" class="content-img">
+        <div id="mobile-sobre-mi" class="mobile-section hidden">
+            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            
+            <div class="text-content about-grid">
+                <h2>Hola, soy Victoria.</h2>
+                
+                <img src="86008.png" class="my-photo" alt="Foto Victoria 1">
+
+                <p>Desde que tengo memoria, he sentido un imán hacia lo místico, la magia y todo aquello que nuestros ojos no ven a simple vista. Mientras otros miraban hacia afuera, yo siempre sentí curiosidad por mirar hacia adentro.</p>
+                <p>Cuando el Tarot llegó a mis manos, no fue un descubrimiento, fue una evidencia. Sentí que había encontrado un lenguaje que siempre supe hablar.</p>
+                
+                <img src="86008.png" class="my-photo" alt="Foto Victoria 2">
+
+                <p>Pasé años estudiándolo con respeto, pero fue cuando conocí la visión de Alejandro Jodorowsky que todo cobró una nueva dimensión.</p>
+                <p>Hoy utilizo el Tarot como herramienta terapéutica y evolutiva. Mi objetivo es acompañarte a descifrar tus bloqueos y devolverte el poder sobre tu destino.</p>
+            </div>
         </div>
 
-        <div id="tarifas" class="section">
-            <button class="btn-back" onclick="showSection('home')">← Volver al menú</button>
-            <img src="tarifas.png" alt="Tarifas" class="content-img">
+        <div id="mobile-tarifas" class="mobile-section hidden">
+            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            
+            <div class="text-content">
+                <h2>Mis Tarifas</h2>
+                
+                <div class="list-item">
+                    <div class="list-title">1. 🌑 LUNA CRECIENTE (20€)</div>
+                    <p><strong>Tiempo:</strong> 15 Minutos<br>
+                    Para una duda puntual. Una respuesta rápida que trae el primer rayo de luz a una situación urgente.</p>
+                </div>
+
+                <div class="list-item">
+                    <div class="list-title">2. 🌓 CUARTO CRECIENTE (40€)</div>
+                    <p><strong>Tiempo:</strong> 30 Minutos<br>
+                    Enfocada en un solo tema (Amor o Trabajo). Profundizamos en la energía disponible.</p>
+                </div>
+
+                <div class="list-item">
+                    <div class="list-title">3. 🌔 LUNA GIBOSA (60€)</div>
+                    <p><strong>Tiempo:</strong> 45 Minutos<br>
+                    Analizamos patrones del pasado que afectan tu presente. Mucha más claridad.</p>
+                </div>
+
+                <div class="list-item">
+                    <div class="list-title">4. 🌕 LUNA LLENA (80€)</div>
+                    <p><strong>Tiempo:</strong> 60 Minutos<br>
+                    Iluminamos todas las áreas de tu vida para un reset total del alma.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-faq" class="mobile-section hidden">
+            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            <div class="text-content">
+                <h2>Preguntas Frecuentes</h2>
+                
+                <div class="list-item">
+                    <div class="list-title">¿Me dirás cosas malas o tragedias?</div>
+                    <p>No. El Tarot Evolutivo no sentencia tu futuro ni busca asustarte. Usamos las cartas para sanar y entender tu presente. Saldrás con paz, no con miedo.</p>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">¿En qué te diferencias de una vidente?</div>
+                    <p>Yo no "adivino" qué te va a pasar, porque el futuro no está escrito. Te ayudo a entender por qué te pasa lo que te pasa.</p>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">¿Funciona a distancia?</div>
+                    <p>¡Sí! La energía no tiene fronteras. Nos conectamos por videollamada y la sesión es tan profunda como frente a frente.</p>
+                </div>
+                 <div class="list-item">
+                    <div class="list-title">¿Cómo reservo?</div>
+                    <p>Ve al botón de "Agenda tu cita", elige día y hora en el calendario y realiza el pago para confirmar.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-mensaje" class="mobile-section hidden">
+            <button class="btn-back-mobile" onclick="showMobileSection('mobile-home')">← Volver al Menú</button>
+            <img src="85973.png" style="width:100%; border-radius:15px;">
         </div>
 
     </div>
 
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Lógica para PC
+        function showDesktopSection(id) {
+            document.querySelectorAll('.desktop-section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.desktop-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('active');
+        }
+
+        // Lógica para Móvil
+        function showMobileSection(id) {
+            document.querySelectorAll('.mobile-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            window.scrollTo(0,0);
         }
     </script>
 </body>
