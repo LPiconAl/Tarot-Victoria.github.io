@@ -32,6 +32,8 @@
         h1, h2, h3 { font-family: 'Cinzel', serif; }
         
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; text-align: center; }
+        
+        /* CLASE DE UTILIDAD: OCULTAR */
         .hidden { display: none !important; }
 
         /* --- SELECTOR DE IDIOMA --- */
@@ -88,10 +90,14 @@
         }
         .design-card h2 { text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 20px; margin-bottom: 30px; font-size: 2rem; color: var(--text-gold); }
         
+        /* Layout PC */
         .about-layout { display: flex; gap: 40px; align-items: flex-start; }
         .about-text { flex: 1; }
         .about-photos { flex: 1; display: flex; flex-direction: column; gap: 20px; }
         .pc-photo { width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); border: 1px solid rgba(240, 230, 210, 0.3); }
+
+        /* Layout Móvil */
+        .about-mobile-layout { display: flex; flex-direction: column; gap: 25px; }
 
         /* --- ORÁCULO --- */
         .paper-note {
@@ -107,11 +113,11 @@
         .btn-back { background: transparent; border: 1px solid white; color: white; padding: 10px 25px; border-radius: 50px; margin-bottom: 20px; }
         .btn-back:hover { background: white; color: black; }
 
-        /* --- MÓVIL --- */
+        /* --- RESPONSIVE LOGIC (AQUÍ ESTÁ EL ARREGLO CON !IMPORTANT) --- */
         @media (max-width: 768px) {
-            .desktop-only { display: none; } 
-            .mobile-only { display: block; }
-            .home-layout { display: none; } 
+            .desktop-only { display: none !important; }  /* Forzar ocultar PC en móvil */
+            .mobile-only { display: block !important; }  /* Forzar mostrar Móvil */
+            .home-layout { display: none !important; } 
             
             .mobile-container { padding: 15px; display: flex; flex-direction: column; align-items: center; }
             .lang-container { top: 10px; right: 10px; padding: 5px; }
@@ -123,11 +129,12 @@
             .menu-icon { width: 50px; height: auto; margin-right: 20px; filter: sepia(0.2); }
             .menu-text h3 { font-size: 1.2rem; color: var(--text-gold); margin-bottom: 5px; text-align: left; }
             .menu-text p { font-size: 0.9rem; color: #ccc; text-align: left; }
-            .about-layout { flex-direction: column-reverse; }
+            
             .btn-back-mobile { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 10px 20px; border-radius: 30px; margin-bottom: 20px; width: 100%; }
         }
+        
         @media (min-width: 769px) {
-            .mobile-only { display: none; }
+            .mobile-only { display: none !important; } /* Forzar ocultar Móvil en PC */
         }
     </style>
 </head>
@@ -209,7 +216,7 @@
             <button class="btn-back tr-back" onclick="goHome()">← Volver</button>
             <div class="design-card">
                 
-                <div class="about-layout desktop-only" style="display:flex;">
+                <div class="about-layout desktop-only">
                     <div class="about-text">
                         <h2 class="tr-about">Sobre Mí</h2>
                         <h3 class="tr-hi" style="color:#c7a0d6; margin-bottom:20px;">Hola, soy Victoria.</h3>
@@ -222,7 +229,7 @@
                     </div>
                 </div>
 
-                <div class="mobile-only" style="display: flex; flex-direction: column; gap: 25px;">
+                <div class="about-mobile-layout mobile-only">
                     <img src="foto1.jpg" class="pc-photo">
                     
                     <div>
